@@ -1,0 +1,45 @@
+@import '../../style/mixins.scss';
+@import '../../style/variables.scss';
+
+.product__block {
+    background: $--color-5;
+    border: 1px solid $--color-1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px;
+}
+.block__photo {
+    transition: all 0.3s;
+}
+.block__photo.active {
+    opacity: 0.2;
+}
+.block__content {
+    .block__title {
+        @include subtitle;
+        padding: 15px 0;
+    }
+    .product__img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+.product__button {
+    text-decoration: none;
+    transition: all 0.3s;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 18px;
+    color: #FFF73D;
+    background: none;
+    border: 1px solid #FFF73D;
+    padding: 5px 10px;
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+}
+.product__button.active {
+    opacity: 1;
+}

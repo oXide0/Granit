@@ -1,0 +1,22 @@
+.start__img {
+	display: block;
+	width: 600px !important;
+	height: 400px !important;
+	object-fit: cover;
+}
+.mySwiper {
+	width: 1161px;
+	height: 400px;
+}
+.swiper__slide {
+	display: flex;
+	justify-content: space-between;
+	gap: 20px;
+}
+.swiper-button-prev::after,
+.swiper-button-next::after {
+	display: none;
+}
+.swiper-pagination {
+    color: #fff;
+}

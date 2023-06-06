@@ -1,0 +1,14 @@
+@import '../../style/mixins.scss';
+@import '../../style/variables.scss';
+
+.faq {
+    padding-top: 100px;
+    max-width: 1161px;
+    margin: 0 auto;
+}
+.faq__title {
+    @include title;
+}
+.faq__accordion {
+    padding-top: 50px;
+}

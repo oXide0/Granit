@@ -1,0 +1,35 @@
+@import '../../style/mixins.scss';
+@import '../../style/variables.scss';
+
+.start {
+    max-width: 1161px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+.slide__col {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.start__title {
+    @include text(45px, 500, 70px, $--color-1, none);
+    text-transform: uppercase;
+}
+.start__subtitle {
+    @include text(20px, 500, 28px, $--color-1, none);
+    padding-top: 42px;
+    flex: 1 1 auto;
+}
+.start__button {
+    width: 115px;
+    text-decoration: none;
+    border: 1px solid $--color-2;
+    padding: 10px 20px;
+    @include text(18px, 500, 18px, $--color-2, none);
+    cursor: pointer;
+    transition: 0.2s;
+    &:hover {
+        background: $--color-2;
+        color: $--color-3;
+    }
+}

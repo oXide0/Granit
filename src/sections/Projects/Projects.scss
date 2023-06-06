@@ -1,0 +1,22 @@
+@import '../../style/mixins.scss';
+@import '../../style/variables.scss';
+
+.projects {
+    padding-top: 87px;
+}
+.projects__title {
+    @include title;
+}
+.swiper {
+    margin-top: 100px;
+}
+.carousel__photo {
+    width: 620px !important;
+    height: 450px !important;
+    object-fit: cover;
+}
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

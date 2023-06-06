@@ -1,0 +1,41 @@
+@import '../../style/index.scss';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $--color-1;
+    padding-top: 60px;
+    max-width: 1161px;
+    margin: 0 auto;
+}
+.header__menu {
+    display: flex;
+    gap: 55px;
+    list-style-type: none;
+    .menu__item {
+        text-decoration: none;
+        @include text(15px, 500, 18px, $--color-1, none);
+        border-bottom: 1px solid $--color-3;
+        &:hover {
+            border-bottom: 1px solid #fff;
+        }
+    }
+    .menu__button {
+        background: none;
+        @include text(15px, 500, 18px, $--color-1, none);
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        border-bottom: 1px solid $--color-3;
+        &:hover {
+            border-bottom: 1px solid #fff;
+        }
+    }
+    .menu__item.active__menu_list {
+        font-weight: 700;
+    }
+}
+.header__contact {
+    @include text(20px, 700, 24px, $--color-1, none);
+}

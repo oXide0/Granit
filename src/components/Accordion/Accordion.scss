@@ -1,0 +1,20 @@
+@import '../../style/variables.scss';
+@import '../../style/mixins.scss';
+
+.accordion-title {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	cursor: pointer;
+    border: 1px solid $--color-1;
+}
+
+.accordion-title {
+    @include text(20px, 500, 24px, $--color-1, none);
+    padding: 18px 70px;
+}
+.accordion-content {
+    @include text(18px, 500, 24px, $--color-1, none);
+    border: 1px solid #fff;
+    padding: 5px 20px;
+}

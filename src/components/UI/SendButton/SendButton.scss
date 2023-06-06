@@ -1,0 +1,26 @@
+@import '../../../style/mixins.scss';
+@import '../../../style/variables.scss';
+
+.send__form {
+    display: flex;
+    .send__text {
+        @include text(15px, 500, 18px, $--color-1, none);
+        background: $--color-7;
+        height: 50px;
+        padding: 0 48px 0 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: default;
+    }
+    .button_send {
+        border: none;
+        background: $--color-4;
+        height: 50px;
+        width: 51px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+}

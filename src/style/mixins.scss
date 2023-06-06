@@ -1,0 +1,23 @@
+@mixin text($fs, $fw, $lh, $clr, $mw){
+    font-size: $fs;
+    font-weight: $fw;
+    line-height: $lh;
+    color: $clr;
+    max-width: $mw;
+}
+@mixin title{
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 2.25rem;
+    text-align: center;
+    text-transform: uppercase;
+    color: $--color-1;
+}
+@mixin subtitle{
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}

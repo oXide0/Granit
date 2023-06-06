@@ -1,0 +1,16 @@
+@import '../../style/mixins.scss';
+@import '../../style/variables.scss';
+
+.catalog {
+    max-width: 1161px;
+    margin: 0 auto;
+    padding-top: 5%;
+}
+.catalog__title {
+    @include title;
+}
+.catalog__row {
+    padding-top: 5%;
+    display: flex;
+    gap: 1.8%;
+}

@@ -1,0 +1,38 @@
+@import '../../style/mixins.scss';
+@import '../../style/variables.scss';
+
+.contact__form {
+    max-width: 1161px;
+    margin: 0 auto;
+    padding-top: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+.contact__img {
+    width: 100%;
+    max-height: 449px;
+    opacity: 0.5;
+}
+.contact__col {
+    padding: 44px 0 44px 100px;
+    background: $--color-3;
+    .contact__title {
+        @include title;
+        text-align: left;
+    }
+    .contact__subtitle {
+        @include text(22px, 500, 24px, $--color-1, none);
+        padding-top: 38px;
+    }
+    .contact__text {
+        @include text(18px, 500, 24px, $--color-1, none);
+        padding-top: 14px;
+    }
+    .contact__src {
+        color: $--color-2;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
