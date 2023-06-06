@@ -11,7 +11,7 @@
 
 .accordion-title {
     @include text(20px, 500, 24px, $--color-1, none);
-    padding: 18px 70px;
+    padding: 18px 70px 18px 20px;
 }
 .accordion-content {
     @include text(18px, 500, 24px, $--color-1, none);

@@ -20,9 +20,6 @@ function Production({ link }) {
 				className='production__swiper'
 			>
 				<SwiperSlide>
-					<img src='img/work_1.jpeg' alt='photo-work' className='carousel__photo' />
-				</SwiperSlide>
-				<SwiperSlide>
 					<img src='img/work_2.jpeg' alt='photo-work' className='carousel__photo' />
 				</SwiperSlide>
 				<SwiperSlide>
@@ -33,9 +30,6 @@ function Production({ link }) {
 				</SwiperSlide>
 				<SwiperSlide>
 					<img src='img/work_5.jpeg' alt='photo-work' className='carousel__photo' />
-				</SwiperSlide>
-				<SwiperSlide>
-					<img src='img/work_6.jpeg' alt='photo-work' className='carousel__photo' />
 				</SwiperSlide>
 			</Swiper>
 		</section>
