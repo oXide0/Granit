@@ -4,7 +4,7 @@ export const AccordionData = [
 		content: 'Подзвонити нам на номер +38 (067) 909 50 69 або написати на пошту - bezsmertnijd@gmail.com',
 	},
 	{
-		title: 'Чи э доставка?',
+		title: 'Чи є доставка?',
 		content: 'Ні, за доставку відповідає покупець',
 	},
 	{

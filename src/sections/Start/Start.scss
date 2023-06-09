@@ -22,14 +22,78 @@
 }
 .start__button {
     width: 115px;
+    display: flex;
+    justify-content: center;
     text-decoration: none;
     border: 1px solid $--color-2;
-    padding: 10px 20px;
+    padding: 10px 0;
     @include text(18px, 500, 18px, $--color-2, none);
     cursor: pointer;
     transition: 0.2s;
     &:hover {
         background: $--color-2;
         color: $--color-3;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .start {
+        padding: 50px 10px 0 10px;
+    }
+    .start__subtitle {
+        padding-top: 20px;
+    }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+    .start {
+        padding: 50px 10px 0 10px;
+    }
+    .start__subtitle {
+        padding-top: 20px;
+    }
+    .start__title {
+        @include text(30px, 500, 35px, $--color-1, none);
+    }
+    .start__subtitle {
+        @include text(18px, 500, 24px, $--color-1, none);
+        padding-top: 20px;
+    }
+    .start__button {
+        width: 80px;
+        padding: 5px 0;
+        @include text(14px, 500, 18px, $--color-2, none);
+    }
+}
+@media (min-width: 0) and (max-width: 768px) {
+    .slide__col {
+        padding: 20px 0 0 10px;
+        position: absolute;
+        z-index: 2;
+    }
+    .start__button {
+        margin-bottom: 20px;
+    }
+}
+@media (max-width: 576px) {
+    .slide__col {
+        padding: 20px 0 0 10px;
+        position: absolute;
+        z-index: 2;
+    }
+    .start__button {
+        margin-bottom: 20px;
+    }
+    .start__title {
+        font-size: 28px;
+    }
+    .start__subtitle {
+        font-size: 18px;
+        padding-top: 10px;
+        line-height: 24px;
+    }
+    .start__button {
+        width: 100px;
+        padding: 5px 0;
+        @include text(16px, 500, 18px, $--color-2, none);
     }
 }

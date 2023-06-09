@@ -2,13 +2,17 @@
 @import '../../style/variables.scss';
 
 .footer {
-    padding: 100px 0;
+    padding: 10% 0;
     max-width: 1161px;
     margin: 0 auto;
 }
 .footer__row {
     display: flex;
     justify-content: space-between;
+}
+.footer__title_sm,
+.footer__subtitle_sm {
+    display: none;
 }
 .footer__col {
     .footer__title {
@@ -19,6 +23,7 @@
         padding-bottom: 8px;
     }
     .footer__subtitle {
+        cursor: pointer;
         text-decoration: none;
         color: $--color-1;
         padding-top: 1.5px;
@@ -38,5 +43,47 @@
             border: none;
             cursor: pointer;
         }
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .footer {
+        padding: 10% 10px;
+    }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+    .footer {
+        padding: 10% 10px;
+    }
+    .footer__subtitle {
+        font-size: 14px;
+    }
+    .application {
+        display: none;
+    }
+}
+@media (min-width: 0) and (max-width: 768px) {
+    .footer__logo {
+        display: none;
+    }
+    .footer {
+        padding: 10% 20px;
+    }
+    .footer__col {
+        max-width: 200px;
+        .footer__title {
+            padding: 15px 0 4px 0;
+        }
+        .footer__subtitle {
+            font-size: 14px;
+        }
+    }
+    .application,
+    .col_sm {
+        display: none;
+    }
+    .footer__title_sm,
+    .footer__subtitle_sm {
+        display: block;
     }
 }

@@ -5,10 +5,10 @@ function Accordion({ title, content }) {
 	const [isActive, setIsActive] = useState(false);
 
 	return (
-		<div className='accordion-item'>
+		<div className='accordion'>
 			<div className='accordion-title' onClick={() => setIsActive(!isActive)}>
 				<div>{title}</div>
-				<div>{isActive ? '-' : '+'}</div>
+				<p className='accordion__sign'>{isActive ? '-' : '+'}</p>
 			</div>
 			{isActive && <div className='accordion-content'>{content}</div>}
 		</div>

@@ -12,6 +12,14 @@
     text-align: center;
     text-transform: uppercase;
     color: $--color-1;
+    @media (min-width: 768px) and (max-width: 992px) {
+        font-size: 1.6rem;
+        line-height: 2rem;
+    }
+    @media (max-width: 768px) {
+        font-size: 1.4rem;
+        line-height: 1.7rem;
+    }
 }
 @mixin subtitle{
     font-weight: 700;
@@ -20,4 +28,12 @@
     text-align: center;
     text-transform: uppercase;
     color: #FFFFFF;
+    @media (min-width: 768px) and (max-width: 992px) {
+        font-size: 1.1rem;
+        line-height: 1.4rem;
+    }
+    @media (max-width: 768px) {
+        font-size: 1rem;
+        line-height: 1.2rem;
+    }
 }

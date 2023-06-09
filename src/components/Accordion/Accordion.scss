@@ -8,7 +8,9 @@
 	cursor: pointer;
     border: 1px solid $--color-1;
 }
-
+.accordion__sign {
+    font-size: 32px;
+}
 .accordion-title {
     @include text(20px, 500, 24px, $--color-1, none);
     padding: 18px 70px 18px 20px;
@@ -17,4 +19,41 @@
     @include text(18px, 500, 24px, $--color-1, none);
     border: 1px solid #fff;
     padding: 5px 20px;
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    .accordion {
+        padding: 0 10px;
+    }
+}
+@media (min-width: 576px) and (max-width: 768px) {
+    .accordion {
+        padding: 0 10px;
+    }
+    .accordion-title {
+        font-size: 18px;
+        padding: 18px 30px 18px 20px;
+    }
+    .accordion-content {
+        font-size: 16px;
+    }
+    .accordion__sign {
+        font-size: 28px;
+    }
+}
+@media (max-width: 576px) {
+    .accordion {
+        padding: 0 10px;
+    }
+    .accordion-title {
+        font-size: 16px;
+        padding: 10px 20px 10px 10px;
+    }
+    .accordion-content {
+        font-size: 14px;
+        padding: 3px 20px;
+    }
+    .accordion__sign {
+        font-size: 20px;
+    }
 }

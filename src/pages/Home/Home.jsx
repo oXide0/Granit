@@ -13,9 +13,22 @@ function Home() {
 	const contacts = useRef(null);
 	const faq = useRef(null);
 
+	const scrollToSection = (elementRef) => {
+		window.scrollTo({
+			top: elementRef.current.offsetTop,
+			behavior: 'smooth',
+		});
+	};
+
 	return (
 		<div className='wrapper'>
-			<Header products={products} production={production} contacts={contacts} faq={faq} />
+			<Header
+				products={products}
+				production={production}
+				contacts={contacts}
+				faq={faq}
+				scrollToSection={scrollToSection}
+			/>
 			<main>
 				<Start />
 				<Products link={products} />
@@ -23,7 +36,13 @@ function Home() {
 				<Production link={production} />
 				<Faq link={faq} />
 			</main>
-			<Footer />
+			<Footer
+				products={products}
+				production={production}
+				contacts={contacts}
+				faq={faq}
+				scrollToSection={scrollToSection}
+			/>
 		</div>
 	);
 }

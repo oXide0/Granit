@@ -1,11 +1,11 @@
 .start__img {
 	display: block;
-	width: 600px !important;
-	height: 400px !important;
+	width: 600px;
+	height: 400px;
 	object-fit: cover;
 }
 .mySwiper {
-	width: 1161px;
+	max-width: 1161px;
 	height: 400px;
 }
 .swiper__slide {
@@ -19,4 +19,21 @@
 }
 .swiper-pagination {
     color: #fff;
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+	.mySwiper {
+		height: 250px;
+	}
+	.start__img {
+		width: 400px;
+		height: 250px;
+	}
+}
+@media (max-width: 768px) {
+	.start__img {
+		position: absolute;
+		width: 100%;
+		opacity: 0.5;
+	}
 }

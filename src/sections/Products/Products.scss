@@ -4,14 +4,32 @@
 .products {
     max-width: 1161px;
     margin: 0 auto;
-    padding-top: 140px;
+    padding-top: 12%;
 }
 .products__title {
     text-align: center;
     @include title;
 }
 .products__row_blocks {
-    padding-top: 30px;
+    padding-top: 20px;
     display: flex;
     gap: 20px;
+}
+
+@media (min-width: 576px) and (max-width: 1200px) {
+    .products {
+        padding: 12% 10px 0 10px;
+    }
+    // .products__row_blocks {
+    //     flex-wrap: wrap;
+    // }
+}
+@media (max-width: 576px) {
+    .products {
+        padding: 12% 10px 0 10px;
+    }
+    .products__row_blocks {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
