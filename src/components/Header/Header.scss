@@ -12,26 +12,45 @@
 .menu__item {
     text-decoration: none;
     @include text(15px, 500, 18px, $--color-1, none);
-    border-bottom: 1px solid $--color-3;
-    &:hover {
-        border-bottom: 1px solid #fff;
-    }
+    display: inline-block;
+    position: relative;
 }
 .header__menu {
     display: flex;
     gap: 55px;
     list-style-type: none;
-    .menu__button {
-        background: none;
-        @include text(15px, 500, 18px, $--color-1, none);
-        border: none;
-        cursor: pointer;
-        padding: 0;
-        border-bottom: 1px solid $--color-3;
-        &:hover {
-            border-bottom: 1px solid #fff;
-        }
-    }
+}
+.menu__button {
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: $--color-4;
+    cursor: pointer;
+    padding: 0;
+    display: inline-block;
+    position: relative;
+    color: #fff;
+    @include text(15px, 500, 18px, $--color-1, none);
+}
+.menu__button::after,
+.menu__item::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.menu__button:hover::after,
+.menu__item:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }
 .header__contact,
 .header__contact_sm {
@@ -76,7 +95,7 @@
         font-size: 12px;
     }
 }
-@media(max-width: 768px) {
+@media (max-width: 768px) {
     .header {
         padding: 11px 10px 0 10px;
         justify-content: flex-start;
@@ -90,7 +109,7 @@
     }
     .header__logo {
         position: fixed;
-		z-index: 11;
+        z-index: 11;
     }
     .menu__item {
         font-size: 18px;
