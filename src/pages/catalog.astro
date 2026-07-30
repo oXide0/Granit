@@ -1,0 +1,98 @@
+---
+import ContactSection from '~/components/ContactSection.astro';
+import Icon from '~/components/Icon.astro';
+import StoneCard from '~/components/StoneCard.astro';
+import { TILES } from '~/data/catalog';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { breadcrumbSchema, itemListSchema, organizationSchema } from '~/utils/seo';
+
+const description =
+	'Каталог видів граніту в Житомирі та області: габро (Буки), лабрадорит, Лізники, Капуста, Покостівка. Зразки плитки для памʼятників, сходів, підвіконь та стільниць з власного цеху на Житомирщині.';
+
+const keywords =
+	'види граніту Житомир, купити граніт Житомир, габро буки, лабрадорит, лізники, капуста граніт, покостівка, гранітна плитка Житомир, граніт Житомирська область, граніт оптом';
+
+const breadcrumbs = [
+	{ name: 'Головна', path: '/' },
+	{ name: 'Каталог', path: '/catalog' },
+];
+
+const schemas = [organizationSchema(), breadcrumbSchema(breadcrumbs), itemListSchema('Види граніту', TILES)];
+---
+
+<BaseLayout
+	title="Види граніту в Житомирі — каталог"
+	description={description}
+	keywords={keywords}
+	schemas={schemas}
+>
+	<div class="container-page pt-28 md:pt-36 lg:pt-40">
+		<nav aria-label="Хлібні крихти">
+			<ol class="flex flex-wrap items-center gap-2 text-sm text-ink-muted">
+				{
+					breadcrumbs.map((crumb, index) =>
+						index === breadcrumbs.length - 1 ? (
+							<li aria-current="page" class="text-ink">
+								{crumb.name}
+							</li>
+						) : (
+							<li class="flex items-center gap-2">
+								<a href={crumb.path} class="link-underline hover:text-ink">
+									{crumb.name}
+								</a>
+								<span aria-hidden="true" class="text-line-strong">
+									/
+								</span>
+							</li>
+						),
+					)
+				}
+			</ol>
+		</nav>
+
+		<div class="mt-10 grid gap-10 border-b border-line pb-14 lg:grid-cols-12 lg:items-end lg:gap-16">
+			<div class="lg:col-span-7">
+				<p class="eyebrow">Каталог</p>
+				<h1 class="mt-5 text-display font-bold text-balance">Види граніту</h1>
+			</div>
+			<p class="text-lead text-ink-muted text-pretty lg:col-span-5">
+				Пʼять видів натурального каменю, з якими ми працюємо постійно у Житомирі та
+				області. Кожен придатний для памʼятників, облицювання, сходів, підвіконь
+				і стільниць — різниця лише у кольорі та структурі зерна.
+			</p>
+		</div>
+	</div>
+
+	<section class="container-page py-14 md:py-20" aria-label="Види граніту">
+		<ul class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+			{
+				TILES.map((tile, index) => (
+					<StoneCard
+						title={tile.title}
+						image={tile.image}
+						alt={tile.alt}
+						description={tile.description}
+						index={index}
+						loading={index < 3 ? 'eager' : 'lazy'}
+					/>
+				))
+			}
+
+			{/* Fills the trailing grid cell with a next step instead of a gap. */}
+			<li class="flex flex-col justify-between gap-8 bg-paper-dim p-7 ring-1 ring-line">
+				<div>
+					<p class="eyebrow">Не визначились?</p>
+					<p class="mt-5 text-h3 font-bold text-balance">
+						Підкажемо, який камінь підійде під ваш виріб і бюджет.
+					</p>
+				</div>
+				<a href="#contacts" class="btn btn-primary w-full">
+					Зв'язатися
+					<Icon name="arrow-right" class="h-4 w-4" />
+				</a>
+			</li>
+		</ul>
+	</section>
+
+	<ContactSection />
+</BaseLayout>

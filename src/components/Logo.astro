@@ -1,0 +1,39 @@
+---
+import { SITE } from '~/data/site';
+
+interface Props {
+	/** `ink` for the paper header, `paper` for the dark footer. */
+	variant?: 'ink' | 'paper';
+	class?: string;
+}
+
+const { variant = 'ink', class: className = '' } = Astro.props;
+---
+
+<!--
+  Lockup rather than a wordmark image: the business has no brand name, so the
+  symbol sits next to live text describing the trade and the city. Stays sharp
+  at any size and adapts if the wording changes.
+-->
+<span class={`inline-flex items-center gap-2.5 ${className}`}>
+	<img
+		src={`/img/mark-${variant}.png`}
+		alt=""
+		width="111"
+		height="107"
+		class="h-8 w-auto lg:h-9"
+	/>
+	<span class="flex flex-col gap-0.5 leading-none">
+		<span class="text-[0.6875rem] font-bold tracking-[0.15em] uppercase lg:text-xs">
+			{SITE.name}
+		</span>
+		<span
+			class:list={[
+				'text-[0.625rem] font-medium tracking-[0.3em] uppercase',
+				variant === 'ink' ? 'text-brass' : 'text-brass-soft',
+			]}
+		>
+			{SITE.city}
+		</span>
+	</span>
+</span>

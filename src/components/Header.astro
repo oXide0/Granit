@@ -1,0 +1,138 @@
+---
+import Icon from '~/components/Icon.astro';
+import Logo from '~/components/Logo.astro';
+import { CONTACTS, NAV, SITE } from '~/data/site';
+
+const pathname = Astro.url.pathname.replace(/index\.html$/, '/').replace(/\.html$/, '');
+const isCurrent = (href: string) => !href.includes('#') && pathname === href;
+---
+
+<header
+	id="site-header"
+	class="fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow] duration-300 border-b border-transparent data-[stuck]:border-line data-[stuck]:bg-paper/85 data-[stuck]:backdrop-blur-xl"
+>
+	<div class="container-page flex h-20 items-center justify-between gap-6 lg:h-24">
+		<a href="/" class="shrink-0" aria-label={`${SITE.name} — на головну`}>
+			<Logo variant="ink" />
+		</a>
+
+		<nav class="hidden items-center gap-9 lg:flex" aria-label="Основна навігація">
+			{
+				NAV.map((item) => (
+					<a
+						href={item.href}
+						aria-current={isCurrent(item.href) ? 'page' : undefined}
+						class="link-underline text-[0.9375rem] font-medium text-ink-soft hover:text-ink aria-[current=page]:text-ink"
+					>
+						{item.label}
+					</a>
+				))
+			}
+		</nav>
+
+		<div class="flex items-center gap-3">
+			<a href={CONTACTS.phoneHref} class="btn btn-primary hidden sm:inline-flex">
+				<Icon name="phone" class="h-4 w-4" />
+				<span class="hidden md:inline">{CONTACTS.phone}</span>
+				<span class="md:hidden">Подзвонити</span>
+			</a>
+
+			<button
+				type="button"
+				id="menu-toggle"
+				aria-controls="mobile-menu"
+				aria-expanded="false"
+				aria-label="Відкрити меню"
+				class="grid h-11 w-11 place-items-center border border-line-strong text-ink transition-colors hover:border-ink lg:hidden"
+			>
+				<Icon name="menu" class="h-5 w-5" />
+			</button>
+		</div>
+	</div>
+</header>
+
+<!-- Full-screen mobile navigation. Hidden from assistive tech while closed. -->
+<div
+	id="mobile-menu"
+	hidden
+	class="fixed inset-0 z-50 flex flex-col bg-paper lg:hidden"
+>
+	<div class="container-page flex h-20 shrink-0 items-center justify-between">
+		<Logo variant="ink" />
+		<button
+			type="button"
+			id="menu-close"
+			aria-label="Закрити меню"
+			class="grid h-11 w-11 place-items-center border border-line-strong text-ink transition-colors hover:border-ink"
+		>
+			<Icon name="close" class="h-5 w-5" />
+		</button>
+	</div>
+
+	<nav class="container-page flex flex-1 flex-col justify-center" aria-label="Мобільна навігація">
+		<ul class="flex flex-col">
+			{
+				NAV.map((item, index) => (
+					<li class="border-t border-line last:border-b">
+						<a
+							href={item.href}
+							class="group flex items-center justify-between py-5 text-2xl font-bold tracking-tight text-ink"
+						>
+							<span class="flex items-baseline gap-4">
+								<span class="text-xs font-medium text-ink-faint">
+									0{index + 1}
+								</span>
+								{item.label}
+							</span>
+							<Icon name="arrow-up-right" class="h-5 w-5 text-ink-faint transition-transform group-hover:translate-x-1" />
+						</a>
+					</li>
+				))
+			}
+		</ul>
+
+		<div class="mt-10 flex flex-col gap-3">
+			<a href={CONTACTS.phoneHref} class="btn btn-primary w-full">
+				<Icon name="phone" class="h-4 w-4" />
+				{CONTACTS.phone}
+			</a>
+			<a href={CONTACTS.emailHref} class="btn btn-outline w-full">
+				<Icon name="mail" class="h-4 w-4" />
+				{CONTACTS.email}
+			</a>
+		</div>
+	</nav>
+</div>
+
+<script>
+	const header = document.getElementById('site-header')!;
+	const menu = document.getElementById('mobile-menu')!;
+	const toggle = document.getElementById('menu-toggle')!;
+	const close = document.getElementById('menu-close')!;
+
+	const setMenu = (open: boolean) => {
+		menu.hidden = !open;
+		toggle.setAttribute('aria-expanded', String(open));
+		document.documentElement.style.overflow = open ? 'hidden' : '';
+		if (open) close.focus();
+		else toggle.focus();
+	};
+
+	toggle.addEventListener('click', () => setMenu(true));
+	close.addEventListener('click', () => setMenu(false));
+	// Any link tap navigates, so drop the overlay with it.
+	menu.addEventListener('click', (e) => {
+		if ((e.target as HTMLElement).closest('a')) setMenu(false);
+	});
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape' && !menu.hidden) setMenu(false);
+	});
+
+	// Give the header a surface only once the page has scrolled under it.
+	const onScroll = () => {
+		if (window.scrollY > 12) header.setAttribute('data-stuck', '');
+		else header.removeAttribute('data-stuck');
+	};
+	onScroll();
+	addEventListener('scroll', onScroll, { passive: true });
+</script>

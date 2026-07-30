@@ -1,0 +1,42 @@
+---
+import AdvantagesSection from '~/components/AdvantagesSection.astro';
+import ContactSection from '~/components/ContactSection.astro';
+import FaqSection from '~/components/FaqSection.astro';
+import Hero from '~/components/Hero.astro';
+import ProductionSection from '~/components/ProductionSection.astro';
+import ProductsSection from '~/components/ProductsSection.astro';
+import StoneStrip from '~/components/StoneStrip.astro';
+import { FAQ } from '~/data/faq';
+import { PRODUCTS } from '~/data/products';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { faqSchema, itemListSchema, organizationSchema, websiteSchema } from '~/utils/seo';
+
+// Note: no delivery claim here — the FAQ states the buyer arranges delivery.
+const description =
+	'Вироби з граніту в Житомирі та області від виробника: памʼятники, гранітні плити, сходи, підвіконня, стільниці, бордюри та вази. Власний цех на Житомирщині, опт і роздріб.';
+
+const keywords =
+	'граніт Житомир, купити граніт Житомир, гранітна майстерня Житомир, памʼятники Житомир, граніт Житомирська область, граніт оптом, гранітні плити, одинарні памʼятники, подвійні памʼятники, меморіальні комплекси, хрести з граніту, підвіконня з граніту, стільниці з граніту, сходи з граніту, гранітний бордюр, кулі з граніту, гранітні вази';
+
+const schemas = [
+	organizationSchema(),
+	websiteSchema(),
+	itemListSchema('Продукція з граніту', PRODUCTS),
+	faqSchema(FAQ),
+];
+---
+
+<BaseLayout
+	title="Граніт у Житомирі — памʼятники, плитка, сходи від виробника"
+	description={description}
+	keywords={keywords}
+	schemas={schemas}
+>
+	<Hero />
+	<StoneStrip />
+	<ProductsSection />
+	<AdvantagesSection />
+	<ProductionSection />
+	<FaqSection />
+	<ContactSection />
+</BaseLayout>

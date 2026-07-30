@@ -1,0 +1,41 @@
+---
+import Icon from '~/components/Icon.astro';
+import { FAQ } from '~/data/faq';
+import { CONTACTS } from '~/data/site';
+---
+
+<section id="faq" class="container-page py-20 md:py-28">
+	<div class="grid gap-12 lg:grid-cols-12 lg:gap-16">
+		<div class="lg:col-span-4">
+			<p class="eyebrow">FAQ</p>
+			<h2 class="mt-5 text-h2 font-bold text-balance">Часті запитання</h2>
+			<p class="mt-5 text-[0.9375rem] leading-relaxed text-ink-muted">
+				Не знайшли відповідь? Зателефонуйте — підкажемо за пару хвилин.
+			</p>
+			<a href={CONTACTS.phoneHref} class="btn btn-outline mt-6">
+				<Icon name="phone" class="h-4 w-4" />
+				{CONTACTS.phone}
+			</a>
+		</div>
+
+		<!-- <details>/<summary>: no JavaScript, and the answers stay in the DOM
+		     for crawlers whether the panel is open or shut. -->
+		<div class="lg:col-span-8">
+			{
+				FAQ.map((item) => (
+					<details class="group border-t border-line last:border-b">
+						<summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-h3 font-bold text-balance [&::-webkit-details-marker]:hidden">
+							{item.question}
+							<span class="grid h-9 w-9 shrink-0 place-items-center border border-line-strong text-ink transition-all duration-300 group-open:rotate-45 group-open:border-ink group-open:bg-ink group-open:text-paper">
+								<Icon name="plus" class="h-4 w-4" />
+							</span>
+						</summary>
+						<p class="max-w-2xl pb-7 text-[0.9375rem] leading-relaxed text-ink-muted text-pretty">
+							{item.answer}
+						</p>
+					</details>
+				))
+			}
+		</div>
+	</div>
+</section>

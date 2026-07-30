@@ -1,0 +1,94 @@
+---
+import Footer from '~/components/Footer.astro';
+import Header from '~/components/Header.astro';
+import MobileCallBar from '~/components/MobileCallBar.astro';
+import { SITE } from '~/data/site';
+import { canonicalUrl } from '~/utils/seo';
+import '~/styles/global.css';
+
+interface Props {
+	/** Page title without the brand suffix. */
+	title: string;
+	description: string;
+	keywords?: string;
+	/** Absolute-from-root path to the social sharing image. */
+	image?: string;
+	noindex?: boolean;
+	/** JSON-LD objects appended to the document head. */
+	schemas?: Record<string, unknown>[];
+}
+
+const { title, description, keywords, image = SITE.ogImage, noindex = false, schemas = [] } = Astro.props;
+
+const canonical = canonicalUrl(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site).href;
+// No brand suffix: the business trades without a brand name, so each page title
+// stands on its own rather than appending one.
+const fullTitle = title;
+---
+
+<!doctype html>
+<html lang={SITE.lang}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+
+		<title>{fullTitle}</title>
+		<meta name="description" content={description} />
+		{keywords && <meta name="keywords" content={keywords} />}
+		<link rel="canonical" href={canonical} />
+		<meta
+			name="robots"
+			content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+		/>
+
+		<!-- Single-language site: tell crawlers so explicitly. -->
+		<link rel="alternate" hreflang="uk" href={canonical} />
+		<link rel="alternate" hreflang="x-default" href={canonical} />
+
+		<link rel="icon" type="image/png" href="/img/granit_icon.png" />
+		<link rel="apple-touch-icon" href="/img/granit_icon.png" />
+		<meta name="theme-color" content={SITE.themeColor} />
+		<link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+		<!-- The weights used above the fold; avoids a flash of fallback text. -->
+		<link rel="preload" as="font" type="font/woff2" href="/font/Gilroy-Bold.woff2" crossorigin />
+		<link rel="preload" as="font" type="font/woff2" href="/font/Gilroy-Regular.woff2" crossorigin />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={`${SITE.name}, ${SITE.city}`} />
+		<meta property="og:locale" content={SITE.locale} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:title" content={fullTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:alt" content={title} />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={fullTitle} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+
+		{
+			schemas.map((schema) => (
+				<script type="application/ld+json" set:html={JSON.stringify(schema)} is:inline />
+			))
+		}
+	</head>
+	<body>
+		<a
+			href="#main"
+			class="btn btn-primary sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100"
+		>
+			Перейти до основного вмісту
+		</a>
+
+		<Header />
+		<main id="main">
+			<slot />
+		</main>
+		<Footer />
+		<MobileCallBar />
+	</body>
+</html>
