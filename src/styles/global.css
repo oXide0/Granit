@@ -1,230 +1,259 @@
-@import 'tailwindcss';
+/* ==========================================================================
+   Глобальні стилі та дизайн-токени
+   Палітра: відтінки каменю — антрацит, сірий, тепла піщана вохра як акцент.
+   ========================================================================== */
 
-/* ---------------------------------------------------------------------------
-   Design tokens — "light editorial stone".
-   Warm paper background, near-black ink, brass used only in small doses so the
-   granite photography carries the colour.
-   --------------------------------------------------------------------------- */
-@theme {
-	--color-paper: #f7f5f2;
-	--color-paper-dim: #efece7;
-	--color-surface: #ffffff;
-	--color-ink: #14140f;
-	--color-ink-soft: #3b382f;
-	--color-ink-muted: #6b665e;
-	--color-ink-faint: #9c968c;
-	--color-line: #e3ded6;
-	--color-line-strong: #cec7bc;
-	--color-brass: #96703c;
-	--color-brass-soft: #b08d59;
+:root {
+  /* Камінь: темні тони */
+  --c-ink: #16181b;
+  --c-graphite: #22262b;
+  --c-slate: #3a4046;
+  --c-stone: #6d757d;
 
-	--font-display: 'Gilroy', ui-sans-serif, system-ui, sans-serif;
-	--font-sans: 'Gilroy', ui-sans-serif, system-ui, sans-serif;
+  /* Камінь: світлі тони */
+  --c-dust: #9aa1a8;
+  --c-sand-100: #f3f0ec;
+  --c-sand-200: #e6e1d9;
+  --c-paper: #fbfaf8;
+  --c-white: #ffffff;
 
-	/* Fluid display sizes so headings never need per-breakpoint overrides. */
-	--text-display: clamp(2.5rem, 1.2rem + 5.2vw, 5rem);
-	--text-display--line-height: 0.95;
-	--text-display--letter-spacing: -0.03em;
-	--text-h2: clamp(1.75rem, 1.1rem + 2.6vw, 3rem);
-	--text-h2--line-height: 1.05;
-	--text-h2--letter-spacing: -0.02em;
-	--text-h3: clamp(1.125rem, 0.95rem + 0.7vw, 1.5rem);
-	--text-h3--line-height: 1.2;
-	--text-h3--letter-spacing: -0.01em;
-	--text-lead: clamp(1rem, 0.95rem + 0.35vw, 1.25rem);
-	--text-lead--line-height: 1.65;
+  /* Акцент — тепла вохра (пісковик) */
+  --c-accent: #b87d3c;
+  --c-accent-strong: #9c6729;
+  --c-accent-soft: #f0e3d1;
 
-	--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --c-text: var(--c-ink);
+  --c-text-muted: #545c64;
+  --c-line: rgba(22, 24, 27, 0.12);
+
+  --font-sans: 'Segoe UI', system-ui, -apple-system, 'Noto Sans', Roboto, Arial,
+    sans-serif;
+
+  --radius: 4px;
+  --radius-lg: 8px;
+
+  --container: 1180px;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --section-y: clamp(3.5rem, 8vw, 6.5rem);
+
+  --shadow-sm: 0 1px 2px rgba(22, 24, 27, 0.08);
+  --shadow-md: 0 6px 24px rgba(22, 24, 27, 0.1);
+
+  /* Висота мобільної панелі дзвінка */
+  --callbar-h: 62px;
 }
 
-/* Gilroy — `swap` keeps text painted while the webfont loads. */
-@font-face {
-	font-family: 'Gilroy';
-	src:
-		url('/font/Gilroy-Regular.woff2') format('woff2'),
-		url('/font/Gilroy-Regular.woff') format('woff');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: 'Gilroy';
-	src:
-		url('/font/Gilroy-Medium.woff2') format('woff2'),
-		url('/font/Gilroy-Medium.woff') format('woff');
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: 'Gilroy';
-	src:
-		url('/font/Gilroy-Bold.woff2') format('woff2'),
-		url('/font/Gilroy-Bold.woff') format('woff');
-	font-weight: 700;
-	font-style: normal;
-	font-display: swap;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@layer base {
-	html {
-		scroll-behavior: smooth;
-		/* Clears the sticky header (5rem mobile / 6rem desktop) when jumping to
-		   an in-page anchor. Sections carry their own top padding, so this is
-		   the only offset needed — adding scroll-margin as well double-counts. */
-		scroll-padding-top: 7rem;
-		-webkit-text-size-adjust: 100%;
-	}
-
-	body {
-		background-color: var(--color-paper);
-		color: var(--color-ink);
-		font-family: var(--font-sans);
-		font-weight: 400;
-		-webkit-font-smoothing: antialiased;
-		text-rendering: optimizeLegibility;
-	}
-
-	/* The mobile call bar is fixed to the bottom — keep it off the footer. */
-	@media (max-width: 767px) {
-		body {
-			padding-bottom: 4.5rem;
-		}
-	}
-
-	:focus-visible {
-		outline: 2px solid var(--color-brass);
-		outline-offset: 3px;
-		border-radius: 2px;
-	}
-
-	::selection {
-		background: var(--color-ink);
-		color: var(--color-paper);
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		html {
-			scroll-behavior: auto;
-		}
-		*,
-		*::before,
-		*::after {
-			animation-duration: 0.01ms !important;
-			transition-duration: 0.01ms !important;
-		}
-	}
+html {
+  scroll-behavior: smooth;
+  /* компенсація липкої шапки при переході по якорях */
+  scroll-padding-top: 76px;
+  -webkit-text-size-adjust: 100%;
 }
 
-@layer components {
-	.container-page {
-		width: 100%;
-		max-width: 84rem;
-		margin-inline: auto;
-		padding-inline: 1.25rem;
-	}
-	@media (min-width: 768px) {
-		.container-page {
-			padding-inline: 2rem;
-		}
-	}
-	@media (min-width: 1280px) {
-		.container-page {
-			padding-inline: 3rem;
-		}
-	}
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  line-height: 1.65;
+  color: var(--c-text);
+  background: var(--c-paper);
+  -webkit-font-smoothing: antialiased;
+}
 
-	/* Small uppercase kicker that opens most sections. */
-	.eyebrow {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.625rem;
-		font-size: 0.6875rem;
-		font-weight: 700;
-		letter-spacing: 0.22em;
-		text-transform: uppercase;
-		color: var(--color-brass);
-	}
-	.eyebrow::before {
-		content: '';
-		width: 1.75rem;
-		height: 1px;
-		background: currentColor;
-	}
+/* місце під фіксовану мобільну кнопку дзвінка */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: var(--callbar-h);
+  }
+}
 
-	.btn {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		gap: 0.625rem;
-		padding: 0.9375rem 1.75rem;
-		font-size: 0.9375rem;
-		font-weight: 700;
-		line-height: 1;
-		letter-spacing: 0.01em;
-		border: 1px solid transparent;
-		cursor: pointer;
-		transition:
-			background-color 0.25s var(--ease-out-expo),
-			color 0.25s var(--ease-out-expo),
-			border-color 0.25s var(--ease-out-expo),
-			transform 0.25s var(--ease-out-expo);
-	}
-	.btn:active {
-		transform: translateY(1px);
-	}
+h1,
+h2,
+h3,
+h4 {
+  margin: 0 0 0.5em;
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
 
-	.btn-primary {
-		background: var(--color-ink);
-		color: var(--color-paper);
-	}
-	.btn-primary:hover {
-		background: var(--color-brass);
-	}
+h1 {
+  font-size: clamp(2rem, 1.4rem + 3vw, 3.5rem);
+}
+h2 {
+  font-size: clamp(1.6rem, 1.2rem + 1.8vw, 2.5rem);
+}
+h3 {
+  font-size: clamp(1.15rem, 1.05rem + 0.5vw, 1.375rem);
+}
 
-	.btn-outline {
-		border-color: var(--color-line-strong);
-		color: var(--color-ink);
-	}
-	.btn-outline:hover {
-		border-color: var(--color-ink);
-		background: var(--color-ink);
-		color: var(--color-paper);
-	}
+p {
+  margin: 0 0 1rem;
+  text-wrap: pretty;
+}
 
-	.btn-on-ink {
-		background: var(--color-paper);
-		color: var(--color-ink);
-	}
-	.btn-on-ink:hover {
-		background: var(--color-brass);
-		color: var(--color-paper);
-	}
+a {
+  color: inherit;
+}
 
-	.btn-ghost-on-ink {
-		border-color: rgb(255 255 255 / 22%);
-		color: var(--color-paper);
-	}
-	.btn-ghost-on-ink:hover {
-		border-color: var(--color-paper);
-		background: var(--color-paper);
-		color: var(--color-ink);
-	}
+img,
+svg,
+picture {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 
-	/* Underline that wipes in from the left on hover. Colour is transitioned here
-	   too, so callers never need Tailwind's `transition-colors` — that utility
-	   would replace `transition-property` and kill the wipe. */
-	.link-underline {
-		background-image: linear-gradient(currentColor, currentColor);
-		background-size: 0% 1px;
-		background-position: 0 100%;
-		background-repeat: no-repeat;
-		transition:
-			background-size 0.35s var(--ease-out-expo),
-			color 0.25s var(--ease-out-expo);
-	}
-	.link-underline:hover,
-	.link-underline[aria-current='page'] {
-		background-size: 100% 1px;
-	}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--c-accent);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------- Layout */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--section-y);
+}
+
+.section--dark {
+  background: var(--c-ink);
+  color: var(--c-sand-100);
+}
+
+.section--tint {
+  background: var(--c-sand-100);
+}
+
+/* Надзаголовок секції */
+.eyebrow {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+}
+
+.section--dark .eyebrow {
+  color: #d9a460;
+}
+
+.lead {
+  font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  color: var(--c-text-muted);
+  max-width: 62ch;
+}
+
+.section--dark .lead {
+  color: var(--c-dust);
+}
+
+/* --------------------------------------------------------------- Buttons */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.6rem;
+  min-height: 52px;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--primary {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: var(--c-white);
+}
+
+.btn--primary:hover {
+  background: var(--c-accent-strong);
+  border-color: var(--c-accent-strong);
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: currentColor;
+  color: inherit;
+}
+
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.section--tint .btn--ghost:hover,
+.section:not(.section--dark) .btn--ghost:hover {
+  background: rgba(22, 24, 27, 0.06);
+}
+
+.btn--lg {
+  padding: 1.1rem 2rem;
+  min-height: 60px;
+  font-size: 1.0625rem;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* --------------------------------------------------- Допоміжні утиліти */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,0 +1,91 @@
+---
+import Icon from './Icon.astro';
+
+const points = [
+  {
+    title: 'Тільки натуральний камінь',
+    text: 'Працюємо з природним каменем — граніт, габро та інші породи. Без бетонних імітацій та композитів.',
+  },
+  {
+    title: 'Власне виробництво',
+    text: 'Розпил, шліфування та полірування виконуємо у власному цеху. Ви спілкуєтесь напряму з тими, хто робить виріб.',
+  },
+  {
+    title: 'Широкий асортимент',
+    text: 'Від бруківки й підвіконь до пам’ятників і стільниць — повний спектр виробів з каменю в одному місці.',
+  },
+  {
+    title: 'Індивідуальні розміри',
+    text: 'Робимо як готові вироби зі складу, так і нестандартні позиції за вашими кресленнями та замірами.',
+  },
+  {
+    title: 'Приватні клієнти та компанії',
+    text: 'Працюємо з приватними замовниками, будівельними компаніями та ритуальними службами — обсяг значення не має.',
+  },
+  {
+    title: 'Уся Україна',
+    text: 'Приймаємо замовлення з будь-якого регіону. Доставки не робимо — відвантажуємо самовивозом з цеху.',
+  },
+];
+---
+
+<section class="section" id="pro-nas">
+  <div class="container">
+    <span class="eyebrow">Чому ми</span>
+    <h2>Камінь, зроблений на місці</h2>
+    <p class="lead">
+      Ми не посередники: камінь обробляється у нашому цеху в Житомирській області.
+      Тому будь-яке питання щодо розміру, фактури чи термінів вирішується напряму
+      і без зайвих націнок.
+    </p>
+
+    <ul class="points">
+      {points.map((point) => (
+        <li class="point">
+          <span class="point__icon" aria-hidden="true">
+            <Icon name="check" size={18} />
+          </span>
+          <div>
+            <h3>{point.title}</h3>
+            <p>{point.text}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .points {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+    margin-top: clamp(2rem, 5vw, 3rem);
+  }
+
+  .point {
+    display: flex;
+    gap: 0.9rem;
+  }
+
+  .point__icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--c-accent-soft);
+    color: var(--c-accent-strong);
+  }
+
+  .point h3 {
+    margin-bottom: 0.3rem;
+  }
+
+  .point p {
+    margin: 0;
+    color: var(--c-text-muted);
+    font-size: 0.9688rem;
+  }
+</style>

@@ -1,0 +1,128 @@
+---
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+
+/**
+ * Google Maps embed без API-ключа (пошук за адресою).
+ * TODO: коли замовник підтвердить точну точку в'їзду на територію —
+ * замінити запит на координати, напр. `q=50.3123,29.1456`.
+ */
+const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&hl=uk&z=12&output=embed`;
+const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address.full)}`;
+---
+
+<section class="section section--tint" id="roztashuvannya">
+  <div class="container">
+    <span class="eyebrow">Розташування</span>
+    <h2>Де нас знайти</h2>
+
+    <div class="place">
+      <div class="place__info">
+        <p class="place__address">
+          <Icon name="pin" size={22} />
+          <span>{site.address.full}</span>
+        </p>
+
+        <ul class="facts">
+          <li>
+            <h3>Самовивіз</h3>
+            <p>
+              Забрати готовий виріб можна безпосередньо з цеху. Час приїзду краще
+              узгодити заздалегідь по телефону.
+            </p>
+          </li>
+          <li>
+            <h3>Доставки не здійснюємо</h3>
+            <p>
+              Ми продаємо матеріал і вироби, але транспортуванням не займаємось —
+              вивіз організовує замовник.
+            </p>
+          </li>
+          <li>
+            <h3>Працюємо по всій Україні</h3>
+            <p>
+              Приймаємо замовлення з будь-якої області. Клієнти з інших регіонів
+              самостійно організовують транспорт.
+            </p>
+          </li>
+        </ul>
+
+        <a class="btn btn--ghost" href={mapLink} target="_blank" rel="noopener noreferrer">
+          Прокласти маршрут
+          <Icon name="arrow-right" size={18} />
+        </a>
+      </div>
+
+      <div class="place__map">
+        <iframe
+          src={mapSrc}
+          title="Карта: с. Слобідка, Коростишівський район, Житомирська область"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .place {
+    display: grid;
+    gap: clamp(1.75rem, 4vw, 3rem);
+    align-items: start;
+    margin-top: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .place__address {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 1.0625rem;
+    font-weight: 600;
+  }
+
+  .place__address :global(svg) {
+    flex: none;
+    margin-top: 0.15rem;
+    color: var(--c-accent);
+  }
+
+  .facts {
+    display: grid;
+    gap: 1.15rem;
+    margin: 1.75rem 0 2rem;
+    padding-left: 1.15rem;
+    border-left: 2px solid var(--c-sand-200);
+  }
+
+  .facts h3 {
+    margin-bottom: 0.2rem;
+    font-size: 1.0625rem;
+  }
+
+  .facts p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--c-text-muted);
+  }
+
+  .place__map {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--c-line);
+    background: var(--c-sand-200);
+  }
+
+  .place__map iframe {
+    display: block;
+    width: 100%;
+    height: clamp(300px, 45vw, 460px);
+    border: 0;
+  }
+
+  @media (min-width: 900px) {
+    .place {
+      grid-template-columns: 1fr 1.1fr;
+    }
+  }
+</style>

@@ -1,138 +1,108 @@
 ---
-import Icon from '~/components/Icon.astro';
-import Logo from '~/components/Logo.astro';
-import { CONTACTS, NAV, SITE } from '~/data/site';
-
-const pathname = Astro.url.pathname.replace(/index\.html$/, '/').replace(/\.html$/, '');
-const isCurrent = (href: string) => !href.includes('#') && pathname === href;
+import { site, nav } from '../data/site';
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
 ---
 
-<header
-	id="site-header"
-	class="fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow] duration-300 border-b border-transparent data-[stuck]:border-line data-[stuck]:bg-paper/85 data-[stuck]:backdrop-blur-xl"
->
-	<div class="container-page flex h-20 items-center justify-between gap-6 lg:h-24">
-		<a href="/" class="shrink-0" aria-label={`${SITE.name} — на головну`}>
-			<Logo variant="ink" />
-		</a>
+<header class="header">
+  <div class="container header__inner">
+    <Logo />
 
-		<nav class="hidden items-center gap-9 lg:flex" aria-label="Основна навігація">
-			{
-				NAV.map((item) => (
-					<a
-						href={item.href}
-						aria-current={isCurrent(item.href) ? 'page' : undefined}
-						class="link-underline text-[0.9375rem] font-medium text-ink-soft hover:text-ink aria-[current=page]:text-ink"
-					>
-						{item.label}
-					</a>
-				))
-			}
-		</nav>
+    <nav class="header__nav" aria-label="Основна навігація">
+      <ul>
+        {nav.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
 
-		<div class="flex items-center gap-3">
-			<a href={CONTACTS.phoneHref} class="btn btn-primary hidden sm:inline-flex">
-				<Icon name="phone" class="h-4 w-4" />
-				<span class="hidden md:inline">{CONTACTS.phone}</span>
-				<span class="md:hidden">Подзвонити</span>
-			</a>
-
-			<button
-				type="button"
-				id="menu-toggle"
-				aria-controls="mobile-menu"
-				aria-expanded="false"
-				aria-label="Відкрити меню"
-				class="grid h-11 w-11 place-items-center border border-line-strong text-ink transition-colors hover:border-ink lg:hidden"
-			>
-				<Icon name="menu" class="h-5 w-5" />
-			</button>
-		</div>
-	</div>
+    <a class="header__phone" href={site.phone.href}>
+      <Icon name="phone" size={18} />
+      <span>{site.phone.display}</span>
+    </a>
+  </div>
 </header>
 
-<!-- Full-screen mobile navigation. Hidden from assistive tech while closed. -->
-<div
-	id="mobile-menu"
-	hidden
-	class="fixed inset-0 z-50 flex flex-col bg-paper lg:hidden"
->
-	<div class="container-page flex h-20 shrink-0 items-center justify-between">
-		<Logo variant="ink" />
-		<button
-			type="button"
-			id="menu-close"
-			aria-label="Закрити меню"
-			class="grid h-11 w-11 place-items-center border border-line-strong text-ink transition-colors hover:border-ink"
-		>
-			<Icon name="close" class="h-5 w-5" />
-		</button>
-	</div>
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(251, 250, 248, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--c-line);
+  }
 
-	<nav class="container-page flex flex-1 flex-col justify-center" aria-label="Мобільна навігація">
-		<ul class="flex flex-col">
-			{
-				NAV.map((item, index) => (
-					<li class="border-t border-line last:border-b">
-						<a
-							href={item.href}
-							class="group flex items-center justify-between py-5 text-2xl font-bold tracking-tight text-ink"
-						>
-							<span class="flex items-baseline gap-4">
-								<span class="text-xs font-medium text-ink-faint">
-									0{index + 1}
-								</span>
-								{item.label}
-							</span>
-							<Icon name="arrow-up-right" class="h-5 w-5 text-ink-faint transition-transform group-hover:translate-x-1" />
-						</a>
-					</li>
-				))
-			}
-		</ul>
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: 68px;
+  }
 
-		<div class="mt-10 flex flex-col gap-3">
-			<a href={CONTACTS.phoneHref} class="btn btn-primary w-full">
-				<Icon name="phone" class="h-4 w-4" />
-				{CONTACTS.phone}
-			</a>
-			<a href={CONTACTS.emailHref} class="btn btn-outline w-full">
-				<Icon name="mail" class="h-4 w-4" />
-				{CONTACTS.email}
-			</a>
-		</div>
-	</nav>
-</div>
+  /* Навігація з'являється лише коли рядок «логотип + меню + телефон»
+     справді вміщається в один рядок (~1040px). Раніше на 860–1040px
+     пункти меню й логотип рвалися на два рядки, а кнопка телефону
+     виїжджала за край екрана. */
+  .header__nav {
+    display: none;
+    margin-inline-start: auto;
+  }
 
-<script>
-	const header = document.getElementById('site-header')!;
-	const menu = document.getElementById('mobile-menu')!;
-	const toggle = document.getElementById('menu-toggle')!;
-	const close = document.getElementById('menu-close')!;
+  .header__nav ul {
+    display: flex;
+    gap: clamp(0.75rem, 2vw, 1.75rem);
+  }
 
-	const setMenu = (open: boolean) => {
-		menu.hidden = !open;
-		toggle.setAttribute('aria-expanded', String(open));
-		document.documentElement.style.overflow = open ? 'hidden' : '';
-		if (open) close.focus();
-		else toggle.focus();
-	};
+  .header__nav a {
+    display: block;
+    white-space: nowrap;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--c-text-muted);
+    padding-block: 0.5rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
 
-	toggle.addEventListener('click', () => setMenu(true));
-	close.addEventListener('click', () => setMenu(false));
-	// Any link tap navigates, so drop the overlay with it.
-	menu.addEventListener('click', (e) => {
-		if ((e.target as HTMLElement).closest('a')) setMenu(false);
-	});
-	document.addEventListener('keydown', (e) => {
-		if (e.key === 'Escape' && !menu.hidden) setMenu(false);
-	});
+  .header__nav a:hover {
+    color: var(--c-ink);
+    border-bottom-color: var(--c-accent);
+  }
 
-	// Give the header a surface only once the page has scrolled under it.
-	const onScroll = () => {
-		if (window.scrollY > 12) header.setAttribute('data-stuck', '');
-		else header.removeAttribute('data-stuck');
-	};
-	onScroll();
-	addEventListener('scroll', onScroll, { passive: true });
-</script>
+  .header__phone {
+    display: none;
+    flex: none;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.1rem;
+    border: 2px solid var(--c-ink);
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .header__phone:hover {
+    background: var(--c-ink);
+    color: var(--c-white);
+  }
+
+  /* Телефон у шапці вмикаємо рано — щойно поруч з логотипом стає місце.
+     На вужчих екранах номер лишається доступним у липкій панелі знизу. */
+  @media (min-width: 560px) {
+    .header__phone {
+      display: inline-flex;
+    }
+  }
+
+  @media (min-width: 1040px) {
+    .header__nav {
+      display: block;
+    }
+  }
+</style>

@@ -1,0 +1,136 @@
+---
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+---
+
+<section class="section section--dark contact" id="kontakty">
+  <div class="container contact__inner">
+    <div>
+      <span class="eyebrow">Контакти</span>
+      <h2>Зателефонуйте — порахуємо вартість</h2>
+      <p class="lead">
+        Каталогу з цінами онлайн немає: вартість завжди залежить від каменю,
+        розміру й обробки. Один дзвінок — і ви отримаєте конкретну цифру під свій
+        виріб.
+      </p>
+    </div>
+
+    <ul class="channels">
+      <li>
+        <a class="channel channel--main" href={site.phone.href}>
+          <span class="channel__icon"><Icon name="phone" size={22} /></span>
+          <span class="channel__text">
+            <span class="channel__label">Телефон</span>
+            <span class="channel__value">{site.phone.display}</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="channel" href={`mailto:${site.email}`}>
+          <span class="channel__icon"><Icon name="mail" size={22} /></span>
+          <span class="channel__text">
+            <span class="channel__label">Email</span>
+            <span class="channel__value">{site.email}</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <div class="channel channel--static">
+          <span class="channel__icon"><Icon name="pin" size={22} /></span>
+          <span class="channel__text">
+            <span class="channel__label">Адреса</span>
+            <span class="channel__value channel__value--sm">{site.address.full}</span>
+          </span>
+        </div>
+      </li>
+    </ul>
+
+    <!-- TODO: додати графік роботи, коли замовник його підтвердить. -->
+  </div>
+</section>
+
+<style>
+  .contact__inner {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+
+  .channels {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .channel {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.15rem 1.35rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.18s ease, background-color 0.18s ease;
+  }
+
+  a.channel:hover {
+    border-color: var(--c-accent);
+    background: rgba(184, 125, 60, 0.1);
+  }
+
+  .channel--main {
+    background: var(--c-accent);
+    border-color: var(--c-accent);
+    color: var(--c-white);
+  }
+
+  a.channel--main:hover {
+    background: var(--c-accent-strong);
+    border-color: var(--c-accent-strong);
+  }
+
+  .channel--static {
+    cursor: default;
+  }
+
+  .channel__icon {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .channel__text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .channel__label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .channel__value {
+    font-size: clamp(1.05rem, 1rem + 0.5vw, 1.375rem);
+    font-weight: 700;
+    word-break: break-word;
+  }
+
+  .channel__value--sm {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+
+  @media (min-width: 900px) {
+    .contact__inner {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

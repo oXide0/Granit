@@ -1,0 +1,110 @@
+---
+import { site } from '../data/site';
+import Icon from './Icon.astro';
+
+const steps = [
+  {
+    n: '01',
+    title: 'Дзвінок',
+    text: 'Розповідаєте, що потрібно: виріб, приблизні розміри, місце встановлення.',
+  },
+  {
+    n: '02',
+    title: 'Уточнення деталей',
+    text: 'Підбираємо породу каменю, фактуру обробки, узгоджуємо розміри та вартість.',
+  },
+  {
+    n: '03',
+    title: 'Виготовлення',
+    text: 'Розпилюємо та обробляємо камінь у цеху. Терміни залежать від складності виробу.',
+  },
+  {
+    n: '04',
+    title: 'Самовивіз',
+    text: 'Забираєте готовий виріб у цеху в с. Слобідка. Доставку не здійснюємо.',
+  },
+];
+---
+
+<section class="section" id="pid-zamovlennya">
+  <div class="container order">
+    <div class="order__intro">
+      <span class="eyebrow">Під замовлення</span>
+      <h2>Нестандартний виріб — не проблема</h2>
+      <p class="lead">
+        Крім готових виробів, беремося за індивідуальні замовлення: нетипові
+        розміри, форма, фактура поверхні чи гравіювання. Достатньо описати задачу
+        по телефону — підкажемо, що реально зробити з каменю і скільки це коштує.
+      </p>
+      <a class="btn btn--primary btn--lg" href={site.phone.href}>
+        <Icon name="phone" size={20} />
+        <span>Обговорити замовлення</span>
+      </a>
+    </div>
+
+    <ol class="steps">
+      {steps.map((step) => (
+        <li class="step">
+          <span class="step__n">{step.n}</span>
+          <div>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .order {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .steps {
+    display: grid;
+    gap: 1.25rem;
+    counter-reset: step;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .step {
+    display: flex;
+    gap: 1rem;
+    padding: 1.15rem 1.25rem;
+    background: var(--c-sand-100);
+    border-radius: var(--radius-lg);
+  }
+
+  .step__n {
+    flex: none;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--c-accent);
+    letter-spacing: 0.02em;
+  }
+
+  .step h3 {
+    margin-bottom: 0.25rem;
+    font-size: 1.05rem;
+  }
+
+  .step p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--c-text-muted);
+  }
+
+  @media (min-width: 900px) {
+    .order {
+      grid-template-columns: 1fr 1fr;
+    }
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

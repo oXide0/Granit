@@ -1,28 +1,68 @@
-import bordur from '~/assets/img/bordur.jpg';
-import granitOptom from '~/assets/img/granit_optom.jpg';
-import granitnaPlytka from '~/assets/img/granitna-plytka.jpg';
-import hrestyGranitni from '~/assets/img/hresty-granitni.jpg';
-import kulia from '~/assets/img/kulia.jpg';
-import memorialniKompleksy from '~/assets/img/memorialni-kompleksy.jpg';
-import odynarniPamyatniki from '~/assets/img/odynarni-pamyatniki.jpg';
-import pidvikonnya from '~/assets/img/pidvikonnya-z-granitu.jpg';
-import podviyniPamyatnyky from '~/assets/img/podviyni-pamyatnyky.jpg';
-import schody from '~/assets/img/schody.jpg';
-import stilnitsya from '~/assets/img/stilnitsya-granitna.jpg';
-import vaza from '~/assets/img/vaza.jpg';
+/**
+ * Категорії продукції.
+ *
+ * `slug` = ім'я файлу фото у `src/assets/products/`.
+ * Наприклад, для категорії зі slug `pamyatnyky` достатньо покласти файл
+ * `src/assets/products/pamyatnyky.jpg` — картинка підхопиться автоматично,
+ * нічого дописувати в коді не треба. Підтримуються .jpg / .jpeg / .png / .webp / .avif.
+ * Поки файлу немає — показується нейтральний плейсхолдер.
+ */
+export interface ProductCategory {
+  slug: string;
+  title: string;
+  description: string;
+  /** alt-текст для реального фото (українською) */
+  alt: string;
+}
 
-/** Descriptions feed both the UI (nothing yet) and the ItemList structured data. */
-export const PRODUCTS = [
-	{ title: 'Граніт оптом', image: granitOptom, alt: 'Гранітні блоки та плити, підготовлені до оптового відвантаження' },
-	{ title: 'Гранітні плити', image: granitnaPlytka, alt: 'Полірована гранітна плитка для облицювання' },
-	{ title: 'Одинарні памʼятники', image: odynarniPamyatniki, alt: 'Одинарний памʼятник з чорного граніту' },
-	{ title: 'Подвійні памʼятники', image: podviyniPamyatnyky, alt: 'Подвійний гранітний памʼятник на дві особи' },
-	{ title: 'Меморіальні комплекси', image: memorialniKompleksy, alt: 'Меморіальний комплекс з граніту з огорожею та плиткою' },
-	{ title: 'Хрести з граніту', image: hrestyGranitni, alt: 'Різьблений хрест з граніту' },
-	{ title: 'Підвіконня з граніту', image: pidvikonnya, alt: 'Гранітне підвіконня з полірованою поверхнею' },
-	{ title: 'Стільниці з граніту', image: stilnitsya, alt: 'Гранітна стільниця для кухні' },
-	{ title: 'Сходи з граніту', image: schody, alt: 'Сходовий марш, облицьований гранітом' },
-	{ title: 'Гранітний бордюр', image: bordur, alt: 'Бордюрний камінь з граніту' },
-	{ title: 'Кулі з граніту', image: kulia, alt: 'Декоративна куля з полірованого граніту' },
-	{ title: 'Гранітні вази', image: vaza, alt: 'Ваза з граніту для меморіального комплексу' },
-] as const;
+export const products: ProductCategory[] = [
+  {
+    slug: 'pamyatnyky',
+    title: "Пам'ятники та надгробки",
+    description:
+      'Одинарні та подвійні пам’ятники, надгробні плити, огорожі й комплектуючі з натурального каменю. Розміри та форма — під конкретне місце.',
+    alt: "Пам'ятники з натурального каменю",
+  },
+  {
+    slug: 'stilnyci',
+    title: 'Стільниці',
+    description:
+      'Кухонні та ванні стільниці з граніту: розпил, шліфування, полірування і обробка кромки під ваші розміри.',
+    alt: 'Гранітна стільниця',
+  },
+  {
+    slug: 'brukivka',
+    title: 'Бруківка',
+    description:
+      'Колота, пиляна та термооброблена бруківка для доріжок, під’їздів і майданчиків. Стійка до морозу й навантажень.',
+    alt: 'Гранітна бруківка',
+  },
+  {
+    slug: 'oblytsuvannya',
+    title: 'Облицювальний і фасадний камінь',
+    description:
+      'Плити та плитка для облицювання фасадів, цоколів, стін і сходових майданчиків. Різні варіанти фактури поверхні.',
+    alt: 'Облицювальні плити з природного каменю',
+  },
+  {
+    slug: 'dekor',
+    title: 'Декоративний камінь',
+    description:
+      'Елементи ландшафтного декору: вази, кулі, стели, елементи малих архітектурних форм із природного каменю.',
+    alt: 'Декоративні вироби з каменю',
+  },
+  {
+    slug: 'skhody',
+    title: 'Сходи',
+    description:
+      'Проступі, підступенки та цільні сходові елементи з граніту — для будинку, ґанку чи громадських приміщень.',
+    alt: 'Гранітні сходи',
+  },
+  {
+    slug: 'pidvikonnya',
+    title: 'Підвіконня',
+    description:
+      'Підвіконня з природного каменю будь-якої довжини та глибини, з обробкою країв на ваш вибір.',
+    alt: 'Підвіконня з природного каменю',
+  },
+];
