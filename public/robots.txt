@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: додати рядок Sitemap: https://<домен>/sitemap-index.xml
+# після реєстрації домену та підключення @astrojs/sitemap.

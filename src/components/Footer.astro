@@ -1,72 +1,105 @@
 ---
-import Icon from '~/components/Icon.astro';
-import Logo from '~/components/Logo.astro';
-import { CONTACTS, NAV, SITE } from '~/data/site';
+import { site, nav } from '../data/site';
+import Logo from './Logo.astro';
 
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-white/10 bg-ink text-paper">
-	<div class="container-page py-16 md:py-20">
-		<div class="grid gap-12 md:grid-cols-12">
-			<div class="md:col-span-5">
-				<a href="/" aria-label={`${SITE.name} — на головну`} class="inline-block">
-					<Logo variant="paper" />
-				</a>
-				<p class="mt-6 max-w-xs text-sm leading-relaxed text-paper/55 text-pretty">
-					Виробництво та продаж виробів з натурального граніту в Житомирі та області.
-					Власний цех на Житомирщині, відвантаження оптом і в роздріб.
-				</p>
-			</div>
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <Logo light />
+      <p>{site.tagline}</p>
+    </div>
 
-			<nav class="md:col-span-3" aria-label="Навігація у підвалі">
-				<h2 class="text-xs tracking-[0.18em] text-paper/45 uppercase">Розділи</h2>
-				<ul class="mt-5 space-y-3">
-					{
-						NAV.map((item) => (
-							<li>
-								<a href={item.href} class="link-underline text-sm text-paper/80 hover:text-paper">
-									{item.label}
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</nav>
+    <nav class="footer__nav" aria-label="Навігація у підвалі">
+      <h2>Розділи</h2>
+      <ul>
+        {nav.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
 
-			<address class="not-italic md:col-span-4">
-				<h2 class="text-xs tracking-[0.18em] text-paper/45 uppercase">Контакти</h2>
-				<ul class="mt-5 space-y-3 text-sm">
-					<li>
-						<a href={CONTACTS.phoneHref} class="link-underline font-bold text-paper">
-							{CONTACTS.phone}
-						</a>
-					</li>
-					<li>
-						<a href={CONTACTS.emailHref} class="link-underline text-paper/80 hover:text-paper">
-							{CONTACTS.email}
-						</a>
-					</li>
-					<li>
-						<a
-							href={CONTACTS.mapUrl}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="link-underline text-paper/80 hover:text-paper"
-						>
-							{CONTACTS.address.full}
-						</a>
-					</li>
-				</ul>
-			</address>
-		</div>
+    <div class="footer__contacts">
+      <h2>Контакти</h2>
+      <ul>
+        <li><a href={site.phone.href}>{site.phone.display}</a></li>
+        <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li>{site.address.short}</li>
+      </ul>
+    </div>
+  </div>
 
-		<div class="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
-			<p class="text-xs text-paper/45">© {year}. Усі права захищено.</p>
-			<a href="#main" class="group inline-flex items-center gap-2 text-xs text-paper/60 hover:text-paper">
-				Нагору
-				<Icon name="arrow-up" class="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-1" />
-			</a>
-		</div>
-	</div>
+  <div class="container footer__bottom">
+    <p>&copy; {year} {site.name}</p>
+    <p class="footer__note">Доставки не здійснюємо — самовивіз з цеху.</p>
+  </div>
 </footer>
+
+<style>
+  .footer {
+    background: var(--c-graphite);
+    color: var(--c-sand-100);
+    padding-top: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .footer__inner {
+    display: grid;
+    gap: clamp(1.75rem, 4vw, 3rem);
+    padding-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .footer__brand p {
+    margin: 0.9rem 0 0;
+    max-width: 34ch;
+    font-size: 0.9375rem;
+    color: var(--c-dust);
+  }
+
+  .footer h2 {
+    margin-bottom: 0.85rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-dust);
+  }
+
+  .footer ul {
+    display: grid;
+    gap: 0.55rem;
+    font-size: 0.9375rem;
+  }
+
+  .footer a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  .footer a:hover {
+    border-bottom-color: var(--c-accent);
+  }
+
+  .footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    justify-content: space-between;
+    padding-block: 1.15rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8438rem;
+    color: var(--c-dust);
+  }
+
+  .footer__bottom p {
+    margin: 0;
+  }
+
+  @media (min-width: 760px) {
+    .footer__inner {
+      grid-template-columns: 1.6fr 1fr 1fr;
+    }
+  }
+</style>

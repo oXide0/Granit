@@ -1,26 +1,48 @@
 ---
-import Icon from '~/components/Icon.astro';
-import { CONTACTS } from '~/data/site';
+/** Фіксована кнопка дзвінка — тільки на мобільних. Головна конверсійна дія. */
+import { site } from '../data/site';
+import Icon from './Icon.astro';
 ---
 
-<!-- Phone is how this business is actually contacted, so on mobile it stays
-     within thumb reach at all times. Body has matching bottom padding. -->
-<div
-	class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 border-t border-line bg-paper/95 backdrop-blur-xl md:hidden"
-	style="padding-bottom: env(safe-area-inset-bottom)"
->
-	<a
-		href={CONTACTS.phoneHref}
-		class="flex items-center justify-center gap-2 py-4 text-sm font-bold text-ink"
-	>
-		<Icon name="phone" class="h-4 w-4" />
-		Подзвонити
-	</a>
-	<a
-		href={CONTACTS.emailHref}
-		class="flex items-center justify-center gap-2 border-l border-line bg-ink py-4 text-sm font-bold text-paper"
-	>
-		<Icon name="mail" class="h-4 w-4" />
-		Написати
-	</a>
+<div class="callbar">
+  <a class="callbar__link" href={site.phone.href}>
+    <Icon name="phone" size={20} />
+    <span>Зателефонувати {site.phone.display}</span>
+  </a>
 </div>
+
+<style>
+  .callbar {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 60;
+    padding: 0.4rem 0.6rem calc(0.4rem + env(safe-area-inset-bottom));
+    background: rgba(22, 24, 27, 0.95);
+    backdrop-filter: blur(6px);
+  }
+
+  .callbar__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    min-height: 50px;
+    padding: 0.5rem 1rem;
+    background: var(--c-accent);
+    color: var(--c-white);
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+  }
+
+  .callbar__link:active {
+    background: var(--c-accent-strong);
+  }
+
+  @media (min-width: 768px) {
+    .callbar {
+      display: none;
+    }
+  }
+</style>

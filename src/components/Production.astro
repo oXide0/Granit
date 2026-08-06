@@ -1,0 +1,89 @@
+---
+import { Image } from 'astro:assets';
+import obrobka from '../assets/production/obrobka-kamenyu.jpeg';
+import verstat from '../assets/production/verstat-rozpylu.jpeg';
+import sklad from '../assets/production/sklad-vyrobiv.jpeg';
+
+const shots = [
+  {
+    src: obrobka,
+    alt: 'Працівник обробляє гранітні заготовки на верстаті в цеху',
+    caption: 'Обробка та полірування',
+  },
+  {
+    src: verstat,
+    alt: 'Верстат для розпилу каменю та підготовлені гранітні блоки в цеху',
+    caption: 'Розпил каменю',
+  },
+  {
+    src: sklad,
+    alt: 'Складські стелажі з готовими плитами та виробами з граніту',
+    caption: 'Готові вироби на складі',
+  },
+];
+---
+
+<section class="section section--dark" id="vyrobnyctvo">
+  <div class="container">
+    <span class="eyebrow">Виробництво</span>
+    <h2>Наш цех</h2>
+    <p class="lead">
+      Фото з виробництва в с. Слобідка: тут камінь розпилюють, шліфують, полірують
+      і збирають у готові вироби. Приїжджайте — можна подивитись матеріал і зразки
+      обробки на місці.
+    </p>
+
+    <ul class="gallery">
+      {shots.map((shot) => (
+        <li class="shot">
+          <Image
+            src={shot.src}
+            alt={shot.alt}
+            widths={[480, 900, 1280]}
+            sizes="(min-width: 900px) 33vw, (min-width: 600px) 50vw, 92vw"
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="shot__caption">{shot.caption}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .gallery {
+    display: grid;
+    gap: clamp(0.75rem, 2vw, 1.25rem);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    margin-top: clamp(2rem, 5vw, 3rem);
+  }
+
+  .shot {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--c-graphite);
+  }
+
+  .shot :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .shot:hover :global(img) {
+    transform: scale(1.03);
+  }
+
+  .shot__caption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 1.75rem 1rem 0.85rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--c-white);
+    background: linear-gradient(to top, rgba(10, 11, 13, 0.85), transparent);
+  }
+</style>
