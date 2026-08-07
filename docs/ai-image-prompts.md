@@ -94,6 +94,21 @@ no drone or aerial view, no professional composition,
 not an American driveway.
 ```
 
+## bordyury.jpg — Бордюри та поребрики
+
+```
+Amateur smartphone photo of grey granite kerbstones and garden edging installed
+along a paved path in the yard of a modern Ukrainian private house, Eastern
+European setting: long sawn granite kerb blocks separating the lawn from
+cobblestone paving, a flowerbed edged with the same stone, clean plastered
+house and brick fence pillars behind, trimmed thuja. Sunny day, natural
+daylight. Handheld snapshot taken while standing on the path and looking along
+the kerb line, wide phone lens, everything in focus, sharp stone texture,
+phone HDR processing.
+No people, no text, no mud, no weeds, no bokeh, no studio lighting,
+no professional composition, not an American driveway.
+```
+
 ## oblytsuvannya.jpg — Облицювальний і фасадний камінь
 
 ```

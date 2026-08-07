@@ -3,6 +3,7 @@ import type { ImageMetadata } from 'astro';
 import { products } from '../data/products';
 import { site } from '../data/site';
 import ProductCard from './ProductCard.astro';
+import CustomOrderCard from './CustomOrderCard.astro';
 import Icon from './Icon.astro';
 
 /**
@@ -36,6 +37,7 @@ for (const [path, module] of Object.entries(files)) {
       {products.map((product) => (
         <ProductCard product={product} image={imagesBySlug.get(product.slug)} />
       ))}
+      <CustomOrderCard />
     </ul>
 
     <div class="price-note">
@@ -53,11 +55,27 @@ for (const [path, module] of Object.entries(files)) {
 </section>
 
 <style>
+  /* Колонки задані явно, а не через auto-fill: 8 категорій + картка
+     «під замовлення» = 9 плиток, тобто рівні 3×3 на десктопі без порожніх
+     клітинок. CustomOrderCard спирається на ці ж брейкпоінти — якщо міняєш
+     їх тут, синхронізуй і там. */
   .grid {
     display: grid;
     gap: clamp(1rem, 2.5vw, 1.75rem);
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    grid-template-columns: 1fr;
     margin-top: clamp(2rem, 5vw, 3rem);
+  }
+
+  @media (min-width: 620px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   .price-note {
