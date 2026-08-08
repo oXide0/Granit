@@ -1,121 +1,129 @@
-# Лендінг «Кам'яні вироби» (Житомирська обл.)
+# "Кам'яні вироби" landing page (Zhytomyr oblast)
 
-Односторінковий сайт на [Astro](https://astro.build) — статична генерація, без бекенду.
-Мета сайту — **дзвінок**, а не онлайн-продаж: цін і каталогу з цінами немає.
+A single-page site built with [Astro](https://astro.build) — statically
+generated, no backend. The goal of the site is a **phone call**, not an online
+sale: there are no prices and no priced catalogue.
 
-Технічне завдання: [doc.md](doc.md) — джерело істини щодо фактів про клієнта.
+The brief lives in [doc.md](doc.md) and is the source of truth for any factual
+claim about the client.
 
-## Запуск
+The page copy is Ukrainian; code comments and docs are English.
+
+## Getting started
 
 ```bash
 npm install
 npm run dev      # http://localhost:4321
-npm run build    # статика в ./dist
-npm run preview  # локальний перегляд зібраної статики
+npm run build    # static output in ./dist
+npm run preview  # serve the built output locally
 ```
 
-Потрібен Node.js ≥ 22.12.
+Requires Node.js >= 22.12.
 
-## Структура
+## Layout of the repo
 
 ```
 src/
 ├── data/
-│   ├── site.ts        # контакти, адреса, назва фірми, меню — єдине джерело
-│   └── products.ts    # категорії продукції (заголовок, опис, alt, slug)
+│   ├── site.ts        # contacts, address, company name, menu — single source
+│   └── products.ts     # product categories (title, description, alt, slug)
 ├── assets/
-│   ├── production/    # реальні фото цеху (використані в Hero та секції «Виробництво»)
-│   └── products/      # фото категорій — ПОКИ ПОРОЖНЯ, показуються плейсхолдери
-├── components/        # секції сторінки
+│   ├── production/     # real workshop photos (used in the hero and "Виробництво")
+│   └── products/       # category photos, resolved by slug (see below)
+├── components/         # page sections
 ├── layouts/BaseLayout.astro   # <head>, SEO, Open Graph, JSON-LD
-├── pages/index.astro          # збірка секцій в один лендінг
-└── styles/global.css          # дизайн-токени (кольори, відступи, кнопки)
+├── pages/index.astro          # assembles the sections into the landing page
+└── styles/global.css          # design tokens (colors, spacing, buttons)
 ```
 
-## Як додати фото продукції
+## Adding product photos
 
-Просто покладіть файл у `src/assets/products/` з іменем, що дорівнює `slug`
-категорії з [src/data/products.ts](src/data/products.ts). Нічого в коді міняти
-не треба — картка підхопить фото сама при наступній збірці.
+Drop a file into `src/assets/products/` named after the category `slug` in
+[src/data/products.ts](src/data/products.ts). No code changes are needed — the
+card picks the image up on the next build.
 
-| Файл (будь-який з .jpg/.jpeg/.png/.webp) | Категорія |
+| File (.jpg / .jpeg / .png / .webp) | Category |
 | --- | --- |
 | `pamyatnyky.jpg` | Пам'ятники та надгробки |
 | `stilnyci.jpg` | Стільниці |
 | `brukivka.jpg` | Бруківка |
-| `bordyury.jpg` | Бордюри та поребрики — **фото ще немає** |
+| `bordyury.jpg` | Бордюри та поребрики |
 | `oblytsuvannya.jpg` | Облицювальний і фасадний камінь |
 | `dekor.jpg` | Декоративний камінь |
 | `skhody.jpg` | Сходи |
 | `pidvikonnya.jpg` | Підвіконня |
 
-Поки файлу немає — на його місці нейтральний плейсхолдер «Фото: <категорія>».
-Оптимальний вихідний розмір — від 1200×900 px, співвідношення 4:3.
+While a file is missing, a neutral "Фото: <category>" placeholder is shown in
+its place. Source images should be at least 1200x900 px, 4:3.
 
-Дев'ята плитка в сітці — не категорія, а картка «Будь-який виріб під
-замовлення» ([CustomOrderCard.astro](src/components/CustomOrderCard.astro)).
-Вона добиває сітку до рівних 3×3 і водночас знімає питання «а якщо мені
-потрібне не те, що в списку?». Якщо додаватимеш нові категорії — тримай
-загальну кількість плиток кратною трьом.
+Astro compresses images to WebP and generates several sizes for different
+screens, so there is no need to resize anything by hand.
 
-> **Увага:** зараз усі фото продукції — **згенеровані AI** (промпти в
-> [docs/ai-image-prompts.md](docs/ai-image-prompts.md)). Це тимчасова заглушка
-> для запуску, а не реальні вироби замовника. Щойно з'являться справжні фото —
-> перезаписати файли тими самими іменами.
+The ninth tile in the grid is not a category — it is the "any custom item" card
+([CustomOrderCard.astro](src/components/CustomOrderCard.astro)). It rounds the
+grid out to an even 3x3 and answers the most common objection ("what if I need
+something that isn't listed?"). If you add categories, keep the total tile
+count a multiple of three, otherwise the last row will have gaps again.
 
-Astro сам стискає зображення у WebP і генерує кілька розмірів під різні екрани.
+> **Note:** every product photo is currently **AI-generated** (prompts live in
+> [docs/ai-image-prompts.md](docs/ai-image-prompts.md)). They are a stand-in for
+> launch, not the client's actual work. Overwrite them with the same filenames
+> as soon as real photos exist.
 
-## Що ще потрібно від замовника (TODO)
+## Still needed from the client (TODO)
 
-Всі місця в коді позначені коментарем `TODO`.
+Every one of these is marked with a `TODO` comment at the relevant place in the
+code.
 
-1. **Назва фірми** — зараз тимчасова «Кам'яні вироби Житомирщини»
-   (`src/data/site.ts`, а також текст логотипа в `src/components/Logo.astro`).
-2. **Логотип** — зараз плейсхолдер (гранований блок + текст) у `Logo.astro` і `public/favicon.svg`.
-3. **Реальні фото продукції** — зараз стоять AI-згенеровані, замінити на справжні
-   вироби (див. таблицю вище).
-4. **Домен** — прописати в `astro.config.mjs` (`site:`) та в `public/robots.txt`.
-   Від цього залежать канонічні URL і Open Graph.
-5. **Точка на карті** — зараз пошук за адресою; краще замінити на координати
-   в'їзду (`src/components/Location.astro`).
-6. **Графік роботи** — не вказаний, місце в `src/components/Contact.astro`.
-7. **Аналітика** — місце під Google Analytics / GTM залишене в `BaseLayout.astro`,
-   поки не підключено.
-8. **OG-зображення** — зараз `public/og-image.jpg` (AI-фото цеху з плитами,
-   1200×900). За бажанням замінити на картинку 1200×630 з назвою фірми.
+1. **Company name** — currently the placeholder "Кам'яні вироби Житомирщини"
+   (`src/data/site.ts`, plus the logo wordmark in `src/components/Logo.astro`).
+2. **Logo** — currently a placeholder (faceted stone block + text) in
+   `Logo.astro` and `public/favicon.svg`.
+3. **Real product photos** — AI images are in place for now; replace them with
+   photos of actual work (see the table above).
+4. **Domain** — set it in `astro.config.mjs` (`site:`) and `public/robots.txt`.
+   Canonical URLs and Open Graph tags depend on it.
+5. **Map pin** — currently an address lookup; better replaced with the
+   coordinates of the yard entrance (`src/components/Location.astro`).
+6. **Opening hours** — not provided; there is a slot for them in
+   `src/components/Contact.astro`.
+7. **Analytics** — a place for Google Analytics / GTM is prepared in
+   `BaseLayout.astro` but nothing is wired up yet.
+8. **OG image** — currently `public/og-image.jpg` (an AI workshop photo,
+   1200x900). Optionally replace with a 1200x630 image carrying the company name.
 
-## Деплой
+## Deployment
 
-Проєкт статичний: `npm run build` → вміст `dist/` заливається на будь-який
-хостинг статики. Бекенд і база не потрібні.
+The project is static: `npm run build` produces `dist/`, which can be uploaded
+to any static host. No backend or database is involved.
 
 ### Cloudflare Workers
 
-Конфіг лежить у [wrangler.jsonc](wrangler.jsonc). Воркер нічого не виконує —
-лише роздає файли з `dist/`.
+The config lives in [wrangler.jsonc](wrangler.jsonc). The worker executes no
+code — it only serves the files in `dist/`.
 
-У налаштуваннях проєкту в дашборді має бути:
+Project settings in the dashboard must be:
 
-| Параметр | Значення |
+| Setting | Value |
 | --- | --- |
 | Build command | `npm run build` |
 | Deploy command | `npx wrangler deploy` |
-| Framework preset | **None** (не Astro) |
+| Framework preset | **None** (not Astro) |
 
-> **Чому preset саме None.** З пресетом Astro Cloudflare підставляє власний
-> адаптер і переводить сайт у рендеринг на сервері. Тоді зображення
-> перестають оптимізуватись під час збірки, а `<img>` починають вести на
-> ендпоінт `/_image?href=…`, який на Workers не працює — там немає `sharp`.
-> Результат: усі картинки віддають 404. Саме тому в `astro.config.mjs`
-> жорстко стоїть `output: 'static'`.
+> **Why the preset must be None.** With the Astro preset, Cloudflare injects its
+> own adapter and switches the site to server rendering. Images then stop being
+> optimized at build time and `<img>` tags start pointing at the
+> `/_image?href=...` endpoint, which cannot work on Workers because `sharp` is
+> not available there. The result is that every image returns 404. This is also
+> why `astro.config.mjs` pins `output: 'static'`.
 
-Перевірити, що збірка правильна, можна не заходячи в браузер:
+You can verify a build is correct without opening a browser:
 
 ```bash
 npm run build
-grep -c '_image?href' dist/index.html   # має бути 0
-ls dist/_astro/*.webp | wc -l           # має бути > 0
+grep -c '_image?href' dist/index.html   # must be 0
+ls dist/_astro/*.webp | wc -l           # must be > 0
 ```
 
-Якщо після редеплою картинок усе ще немає — почистити кеш у дашборді
-(Caching → Purge Everything): стара HTML-сторінка могла закешуватись.
+If images are still missing after a redeploy, purge the cache in the dashboard
+(Caching -> Purge Everything) — an older HTML response may still be cached.
