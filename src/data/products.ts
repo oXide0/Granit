@@ -1,17 +1,18 @@
 /**
- * Категорії продукції.
+ * Product categories.
  *
- * `slug` = ім'я файлу фото у `src/assets/products/`.
- * Наприклад, для категорії зі slug `pamyatnyky` достатньо покласти файл
- * `src/assets/products/pamyatnyky.jpg` — картинка підхопиться автоматично,
- * нічого дописувати в коді не треба. Підтримуються .jpg / .jpeg / .png / .webp / .avif.
- * Поки файлу немає — показується нейтральний плейсхолдер.
+ * `slug` doubles as the photo filename in `src/assets/products/`.
+ * For the category with slug `pamyatnyky`, for example, dropping in
+ * `src/assets/products/pamyatnyky.jpg` is enough — the image is picked up
+ * automatically, no code changes needed. Supported extensions:
+ * .jpg / .jpeg / .png / .webp / .avif.
+ * Until the file exists, a neutral placeholder is shown instead.
  */
 export interface ProductCategory {
   slug: string;
   title: string;
   description: string;
-  /** alt-текст для реального фото (українською) */
+  /** alt text for the real photo (written in Ukrainian, like all page copy) */
   alt: string;
 }
 

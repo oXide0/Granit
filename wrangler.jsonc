@@ -1,0 +1,17 @@
+{
+  // Cloudflare Workers deployment config.
+  //
+  // The site is static: this worker runs no code, it only serves files from
+  // ./dist. The "main" field is deliberately absent — that field is what turns
+  // on server rendering, which makes images be requested through /_image and
+  // return 404 (Workers has no sharp, so they cannot be optimized on the fly).
+  //
+  // Having this file also disables framework auto-detection on Cloudflare's
+  // side, which used to inject its own adapter and break the build.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "granit",
+  "compatibility_date": "2026-08-01",
+  "assets": {
+    "directory": "./dist"
+  }
+}

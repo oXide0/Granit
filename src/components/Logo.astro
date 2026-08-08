@@ -1,12 +1,12 @@
 ---
 /**
- * Тимчасовий логотип-плейсхолдер: гранований кам'яний блок + назва.
- * TODO: замінити на затверджений логотип, коли замовник його надасть (doc.md, п.2).
+ * Placeholder logo: a faceted stone block plus the company name.
+ * TODO: swap for the approved logo once the client provides it (doc.md, §2).
  */
 import { site } from '../data/site';
 
 interface Props {
-  /** темний фон -> світлий текст */
+  /** dark background -> light text */
   light?: boolean;
 }
 const { light = false } = Astro.props;
@@ -60,7 +60,7 @@ const { light = false } = Astro.props;
     font-weight: 700;
     font-size: 1.05rem;
     letter-spacing: -0.01em;
-    /* назва не повинна ламатись на два рядки й розпирати шапку */
+    /* the name must not wrap onto two lines and stretch the header */
     white-space: nowrap;
   }
 

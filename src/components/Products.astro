@@ -7,9 +7,9 @@ import CustomOrderCard from './CustomOrderCard.astro';
 import Icon from './Icon.astro';
 
 /**
- * Автопідхоплення фото категорій.
- * Достатньо покласти файл з іменем = slug категорії у src/assets/products/
- * (напр. `brukivka.jpg`) — картка сама його підхопить при наступній збірці.
+ * Category photos are picked up automatically.
+ * Dropping a file named after a category slug into src/assets/products/
+ * (e.g. `brukivka.jpg`) is enough — the card finds it on the next build.
  */
 const files = import.meta.glob<{ default: ImageMetadata }>(
   '../assets/products/*.{jpg,jpeg,png,webp,avif}',
@@ -55,10 +55,10 @@ for (const [path, module] of Object.entries(files)) {
 </section>
 
 <style>
-  /* Колонки задані явно, а не через auto-fill: 8 категорій + картка
-     «під замовлення» = 9 плиток, тобто рівні 3×3 на десктопі без порожніх
-     клітинок. CustomOrderCard спирається на ці ж брейкпоінти — якщо міняєш
-     їх тут, синхронізуй і там. */
+  /* Columns are declared explicitly rather than via auto-fill: 8 categories
+     plus the custom-order card make 9 tiles, i.e. an even 3x3 on desktop with
+     no empty cells. CustomOrderCard relies on these same breakpoints — if you
+     change them here, change them there too. */
   .grid {
     display: grid;
     gap: clamp(1rem, 2.5vw, 1.75rem);

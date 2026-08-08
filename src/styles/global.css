@@ -1,23 +1,23 @@
 /* ==========================================================================
-   Глобальні стилі та дизайн-токени
-   Палітра: відтінки каменю — антрацит, сірий, тепла піщана вохра як акцент.
+   Global styles and design tokens.
+   Palette: shades of stone — anthracite, grey, warm sandy ochre as the accent.
    ========================================================================== */
 
 :root {
-  /* Камінь: темні тони */
+  /* Stone: dark tones */
   --c-ink: #16181b;
   --c-graphite: #22262b;
   --c-slate: #3a4046;
   --c-stone: #6d757d;
 
-  /* Камінь: світлі тони */
+  /* Stone: light tones */
   --c-dust: #9aa1a8;
   --c-sand-100: #f3f0ec;
   --c-sand-200: #e6e1d9;
   --c-paper: #fbfaf8;
   --c-white: #ffffff;
 
-  /* Акцент — тепла вохра (пісковик) */
+  /* Accent — warm ochre (sandstone) */
   --c-accent: #b87d3c;
   --c-accent-strong: #9c6729;
   --c-accent-soft: #f0e3d1;
@@ -39,7 +39,7 @@
   --shadow-sm: 0 1px 2px rgba(22, 24, 27, 0.08);
   --shadow-md: 0 6px 24px rgba(22, 24, 27, 0.1);
 
-  /* Висота мобільної панелі дзвінка */
+  /* Height of the mobile call bar */
   --callbar-h: 62px;
 }
 
@@ -51,7 +51,7 @@
 
 html {
   scroll-behavior: smooth;
-  /* компенсація липкої шапки при переході по якорях */
+  /* offsets the sticky header when jumping to anchors */
   scroll-padding-top: 76px;
   -webkit-text-size-adjust: 100%;
 }
@@ -66,7 +66,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* місце під фіксовану мобільну кнопку дзвінка */
+/* room for the fixed mobile call button */
 @media (max-width: 767px) {
   body {
     padding-bottom: var(--callbar-h);
@@ -144,7 +144,7 @@ ul {
   background: var(--c-sand-100);
 }
 
-/* Надзаголовок секції */
+/* Section kicker */
 .eyebrow {
   display: block;
   margin-bottom: 0.75rem;
@@ -232,7 +232,7 @@ ul {
   width: 100%;
 }
 
-/* --------------------------------------------------- Допоміжні утиліти */
+/* --------------------------------------------------------- Utilities */
 
 .visually-hidden {
   position: absolute;

@@ -3,9 +3,9 @@ import { site } from '../data/site';
 import Icon from './Icon.astro';
 
 /**
- * Google Maps embed без API-ключа (пошук за адресою).
- * TODO: коли замовник підтвердить точну точку в'їзду на територію —
- * замінити запит на координати, напр. `q=50.3123,29.1456`.
+ * Google Maps embed without an API key (address lookup).
+ * TODO: once the client confirms the exact entrance to the yard, replace the
+ * search query with coordinates, e.g. `q=50.3123,29.1456`.
  */
 const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&hl=uk&z=12&output=embed`;
 const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address.full)}`;

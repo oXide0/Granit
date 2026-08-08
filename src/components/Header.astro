@@ -41,10 +41,10 @@ import Icon from './Icon.astro';
     min-height: 68px;
   }
 
-  /* Навігація з'являється лише коли рядок «логотип + меню + телефон»
-     справді вміщається в один рядок (~1040px). Раніше на 860–1040px
-     пункти меню й логотип рвалися на два рядки, а кнопка телефону
-     виїжджала за край екрана. */
+  /* The nav only appears once "logo + menu + phone" genuinely fits on one
+     line (~1040px). Below that, between 860 and 1040px, the menu items and
+     the logo used to wrap onto two lines and the phone button overflowed
+     off the right edge of the screen. */
   .header__nav {
     display: none;
     margin-inline-start: auto;
@@ -92,8 +92,8 @@ import Icon from './Icon.astro';
     color: var(--c-white);
   }
 
-  /* Телефон у шапці вмикаємо рано — щойно поруч з логотипом стає місце.
-     На вужчих екранах номер лишається доступним у липкій панелі знизу. */
+  /* The phone number appears early — as soon as there is room next to the
+     logo. On narrower screens it stays reachable via the sticky bottom bar. */
   @media (min-width: 560px) {
     .header__phone {
       display: inline-flex;

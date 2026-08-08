@@ -8,7 +8,7 @@ import MobileCallBar from '../components/MobileCallBar.astro';
 interface Props {
   title: string;
   description: string;
-  /** Шлях до OG-зображення в /public */
+  /** Path to the OG image inside /public */
   ogImage?: string;
 }
 
@@ -17,7 +17,7 @@ const { title, description, ogImage = '/og-image.jpg' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImageUrl = new URL(ogImage, Astro.site).href;
 
-// Структуровані дані для пошуковиків (локальний бізнес).
+// Structured data for search engines (local business).
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
@@ -74,8 +74,8 @@ const jsonLd = {
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
 
     <!--
-      TODO (аналітика): сюди підключити Google Analytics / Google Tag Manager,
-      коли замовник підтвердить, що це потрібно. Приклад:
+      TODO (analytics): hook up Google Analytics / Google Tag Manager here
+      once the client confirms they want it. Example:
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
     -->
   </head>

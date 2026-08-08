@@ -1,11 +1,11 @@
 /**
- * Єдине джерело контактних даних сайту.
- * Змінюєш тут — змінюється всюди (шапка, футер, CTA, JSON-LD).
+ * Single source of truth for the site's contact details.
+ * Change it here and it changes everywhere (header, footer, CTAs, JSON-LD).
  */
 export const site = {
   /**
-   * TODO: замовник ще не затвердив назву фірми (doc.md, п.8.1).
-   * Тимчасова нейтральна назва — замінити на реальну після підтвердження.
+   * TODO: the client has not approved a company name yet (doc.md, §8.1).
+   * Temporary neutral name — replace once it is confirmed.
    */
   name: "Кам'яні вироби Житомирщини",
   nameShort: "Кам'яні вироби",
@@ -29,7 +29,7 @@ export const site = {
     country: 'UA',
   },
 
-  /** Пошуковий запит для Google Maps embed. TODO: уточнити точну точку на карті із замовником. */
+  /** Search query for the Google Maps embed. TODO: confirm the exact map pin with the client. */
   mapQuery: 'Слобідка, Коростишівський район, Житомирська область',
 } as const;
 

@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-# TODO: додати рядок Sitemap: https://<домен>/sitemap-index.xml
-# після реєстрації домену та підключення @astrojs/sitemap.
+# TODO: add a "Sitemap: https://<domain>/sitemap-index.xml" line once the
+# domain is registered and @astrojs/sitemap is wired up.
